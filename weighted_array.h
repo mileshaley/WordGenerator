@@ -1,20 +1,22 @@
 #pragma once
 
 #include <vector>
+#include "json-develop/single_include/nlohmann/json.hpp"
+using nlohmann::json;
 
 template<typename T, typename W = float>
 class weighted_array {
 public:
 	struct item {
 		T value;
-		W weight;
 		W self_weight;
+		W weight;
 	};
 
 	weighted_array() {}
 
 	void push_back(T const& val, W const& weight = 1) {
-		m_items.push_back(item{ val, total_weight() + weight, weight});
+		m_items.push_back(item{ val, weight, total_weight() + weight});
 	}
 
 	T& operator[](W const& w) {
@@ -46,6 +48,22 @@ public:
 
 	W total_weight() const {
 		return m_items.empty() ? 0 : m_items.back().weight;
+	}
+	template<typename T, typename W>
+	friend void from_json(json const& js, weighted_array<T, W>& arr) {
+		W curr_weight = 0;
+		for (json const& object : js) {
+			W w = object["weight"];
+			curr_weight += w;
+			arr.m_items.push_back(weighted_array<T, W>::item{object["value"], w, curr_weight});
+		}
+	}
+
+	template<typename T, typename W>
+	friend void to_json(json& js, weighted_array<T, W> const& arr) {
+		for (item const& i : arr) {
+			js.push_back(json{ {"value", i.value}, {"weight", i.self_weight} });
+		}
 	}
 
 private:

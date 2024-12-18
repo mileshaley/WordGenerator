@@ -1,0 +1,8 @@
+[
+  {"value": "a", "weight": 1.0},
+  {"value": "e", "weight": 1.5},
+  {"value": "i", "weight": 1.0},
+  {"value": "o", "weight": 1.0},
+  {"value": "u", "weight": 1.0},
+  {"value": "y", "weight": 0.5}
+]

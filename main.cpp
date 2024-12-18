@@ -1,20 +1,24 @@
 #include "weighted_array.h"
 #include <iostream>
 #include <string>
-#include "json-develop/single_include/nlohmann/json.hpp"
-using nlohmann::json;
+#include <fstream>
 
 int main() {
-	weighted_array<std::string> goant;
+
+	std::ifstream in("data/vowel.json");
+	json vjs = json::parse(in);
+	weighted_array<std::string> vowels = vjs;
 
 	
-	goant.push_back("helno", 3);
-	goant.push_back("tingo", 1.5f);
-	goant.push_back("pung", 0.783f);
-	goant.push_back("pinds", 8);
-	float total = goant.total_weight();
+	//goant.push_back("helno", 3);
+	//goant.push_back("tingo", 1.5f);
+	//goant.push_back("pung", 0.783f);
+	//goant.push_back("pinds", 8);
+
+
+	float total = vowels.total_weight();
 	for (float i = 0; i < total; i += 0.1f)
-	std::cout << i << "/" << total << ": " << goant[i] << std::endl;
+	std::cout << i << "/" << total << ": " << vowels[i] << std::endl;
 
 	return 0;
 }
