@@ -1,10 +1,13 @@
 #include "weighted_array.h"
 #include <iostream>
 #include <string>
+#include "json-develop/single_include/nlohmann/json.hpp"
+using nlohmann::json;
 
 int main() {
 	weighted_array<std::string> goant;
 
+	
 	goant.push_back("helno", 3);
 	goant.push_back("tingo", 1.5f);
 	goant.push_back("pung", 0.783f);
