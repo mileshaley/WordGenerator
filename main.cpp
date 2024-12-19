@@ -4,6 +4,8 @@
 #include <fstream>
 #include <random>
 
+// Need start, middle, and end consonants
+
 int main() {
 	std::random_device rd{};
 	std::mt19937 gen{ rd() };
@@ -19,13 +21,13 @@ int main() {
 	std::uniform_real_distribution<> vowel_distr(0, vowels.total_weight());
 	std::uniform_real_distribution<> consonant_distr(0, consonants.total_weight());
 	std::uniform_int_distribution<> coin_flip_distr(0, 2);
-	std::uniform_int_distribution<> word_length_distr(3, 11);
+	std::normal_distribution<> word_length_distr(6.5, 1.0);
 
 	const int num_words = 30;
 
 	for (int i = 0; i < num_words; ++i) {
 		const int parity_offset = coin_flip_distr(gen);
-		const int upper_bound = word_length_distr(gen) + parity_offset;
+		const int upper_bound = std::round(word_length_distr(gen)) + parity_offset;
 		for (int j = parity_offset; j < upper_bound; ++j) {
 			if (j % 2 == 0) {
 				std::cout << vowels[vowel_distr(gen)];

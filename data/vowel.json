@@ -1,10 +1,11 @@
 [
-  {"value": "a", "weight": 1.0},
-  {"value": "e", "weight": 1.5},
-  {"value": "i", "weight": 1.0},
+  {"value": "a", "weight": 2.0},
+  {"value": "e", "weight": 3.0},
+  {"value": "i", "weight": 1.5},
   {"value": "o", "weight": 1.0},
   {"value": "u", "weight": 1.0},
   {"value": "y", "weight": 0.5},
-  {"value": "ai", "weight": 1.0},
-  {"value": "a", "weight": 1.0}
+
+  {"value": "ai", "weight": 0.75},
+  {"value": "ay", "weight": 0.75}
 ]
