@@ -10,14 +10,12 @@ int main() {
 	std::random_device rd{};
 	std::mt19937 gen{ rd() };
 	std::ifstream v_in("data/vowel.json");
-	json v_js = json::parse(v_in);
-	v_in.close();
 	std::ifstream c_in("data/consonant.json");
-	json c_js = json::parse(c_in);
+	weighted_array<std::string, double> vowels = json::parse(v_in);
+	weighted_array<std::string, double> consonants = json::parse(c_in);
+	v_in.close();
 	c_in.close();
-	
-	weighted_array<std::string, double> vowels = v_js;
-	weighted_array<std::string, double> consonants = c_js;
+
 	std::uniform_real_distribution<> vowel_distr(0, vowels.total_weight());
 	std::uniform_real_distribution<> consonant_distr(0, consonants.total_weight());
 	std::uniform_int_distribution<> coin_flip_distr(0, 2);
