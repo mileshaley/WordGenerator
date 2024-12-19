@@ -42,13 +42,21 @@ public:
 		return m_items[found_idx].value;
 	}
 
-	std::vector<item>& get_items() {
-		return m_items;
-	}
-
 	W total_weight() const {
 		return m_items.empty() ? 0 : m_items.back().weight;
 	}
+
+	void normalize(W const& new_total_weight) {
+		if (m_items.empty()) { return; }
+		const W div = new_total_weight / m_items.back().weight;
+		W curr_weight = 0;
+		for (item& i : m_items) {
+			i.self_weight /= div;
+			curr_weight += i.self_weight;
+			i.weight = curr_weight;
+		}
+	}
+
 	template<typename T, typename W>
 	friend void from_json(json const& js, weighted_array<T, W>& arr) {
 		W curr_weight = 0;
