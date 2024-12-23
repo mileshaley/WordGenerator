@@ -19,6 +19,7 @@ public:
 		m_items.push_back(item{ val, weight, total_weight() + weight});
 	}
 
+	// Performs a binary search on weights (since they are always ascending)
 	T& operator[](W const& w) {
 		if (m_items.empty()) { return m_items[0].value; }
 		int begin = 0;

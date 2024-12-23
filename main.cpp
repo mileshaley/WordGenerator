@@ -21,7 +21,7 @@ int main() {
 	std::uniform_int_distribution<> coin_flip_distr(0, 2);
 	std::normal_distribution<> word_length_distr(6.5, 1.0);
 
-	const int num_words = 30;
+	const int num_words = 50;
 
 	for (int i = 0; i < num_words; ++i) {
 		const int parity_offset = coin_flip_distr(gen);
@@ -35,11 +35,6 @@ int main() {
 		}
 		std::cout << std::endl;
 	}
-
-
-	//float total = vowels.total_weight();
-	//for (float i = 0; i < total; i += 0.1f)
-	//std::cout << i << "/" << total << ": " << vowels[i] << std::endl;
 
 	return 0;
 }
